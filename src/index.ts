@@ -17,6 +17,12 @@ const app = express();
 app.set( "views", path.join( __dirname, "views" ) );
 app.set( "view engine", "ejs" );
 
+// Configure Express to serve static files in the public folder
+app.use( express.static( path.join( __dirname, "public" ) ) );
+
+// Configure Express to parse incoming JSON data
+app.use( express.json() );
+
 // Configure session auth
 sessionAuth.register( app );
 
@@ -30,9 +36,6 @@ routes.register( app );
 //       console.log( `server started at http://localhost:${ port }` );
 //   } );
 // })
-
-// Configure Express to parse incoming JSON data
-app.use( express.json() );
 
 app.listen( port, () => {
   // tslint:disable-next-line:no-console
